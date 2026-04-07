@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nhận diện chó hoặc mèo</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        img {
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .cat {
+            color: #ff6b6b;
+        }
+
+        .dog {
+            color: #4dabf7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🐱🐶 Nhận diện chó hoặc mèo</h2>
+
+    <!-- ❗ sửa action -->
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required><br>
+        <button type="submit">Kết quả</button>
+    </form>
+
+    <!-- ❗ chỉ hiện khi có ảnh -->
+    {% if image_path %}
+        <img src="/{{ image_path }}" width="250">
+    {% endif %}
+
+    <!-- ❗ chỉ hiện khi có kết quả -->
+    {% if result %}
+        <div class="result">
+            Kết quả:
+            <span class="{{ 'cat' if 'Cat' in result else 'dog' }}">
+                {{ result }}
+            </span>
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
